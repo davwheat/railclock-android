@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Rail Clock</string>
+    <string name="show_date_label">Show date</string>
+    <string name="show_date_desc">Display today\'s date underneath the current time</string>
+</resources>

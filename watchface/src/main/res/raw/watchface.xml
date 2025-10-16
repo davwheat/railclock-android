@@ -1,0 +1,431 @@
+<?xml version="1.0"?>
+<WatchFace
+    height="450"
+    width="450">
+    <Metadata
+        key="CLOCK_TYPE"
+        value="DIGITAL" />
+
+    <UserConfigurations>
+        <BooleanConfiguration
+            defaultValue="TRUE"
+            displayName="show_date_label"
+            id="show_date"
+            screenReaderText="show_date_label" />
+    </UserConfigurations>
+
+    <Scene backgroundColor="#ff000000">
+        <Condition>
+            <Expressions>
+                <Expression name="show_date">
+                    <![CDATA[[CONFIGURATION.show_date] == 1]]>
+                </Expression>
+            </Expressions>
+            <Compare expression="show_date">
+                <!-- Time only -->
+                <Group
+                    name="inner_ring"
+                    alpha="255"
+                    height="450"
+                    pivotX="0.5"
+                    pivotY="0.5"
+                    width="450"
+                    x="0"
+                    y="0">
+                    <DigitalClock
+                        height="450"
+                        width="450"
+                        x="0"
+                        y="0">
+
+                        <!-- Interactive mode version-->
+                        <TimeText
+                            alpha="255"
+                            format="hh:mm"
+                            height="100"
+                            width="450"
+                            x="0"
+                            y="175">
+                            <Variant
+                                mode="AMBIENT"
+                                target="alpha"
+                                value="0" />
+                            <Font
+                                color="#ffffffff"
+                                family="ra_numerics"
+                                size="110"
+                                weight="BOLD" />
+                        </TimeText>
+
+                        <!-- Ambient mode version - thinner weight -->
+                        <TimeText
+                            alpha="0"
+                            format="hh:mm"
+                            height="100"
+                            width="450"
+                            x="0"
+                            y="175">
+                            <Variant
+                                mode="AMBIENT"
+                                target="alpha"
+                                value="255" />
+                            <Font
+                                color="#ffffffff"
+                                family="ra_light"
+                                size="110"
+                                weight="LIGHT" />
+                        </TimeText>
+                    </DigitalClock>
+                </Group>
+            </Compare>
+            <Default>
+                <!-- Time and Date -->
+                <Group
+                    name="inner_ring"
+                    alpha="255"
+                    height="450"
+                    pivotX="0.5"
+                    pivotY="0.5"
+                    width="450"
+                    x="0"
+                    y="0">
+                    <Transform
+                        target="alpha"
+                        value="[CONFIGURATION.show_date] ? 255 : 0">
+                        <Animation duration="0" />
+                    </Transform>
+
+                    <DigitalClock
+                        height="450"
+                        width="450"
+                        x="0"
+                        y="0">
+
+                        <!-- Interactive mode version-->
+                        <TimeText
+                            alpha="255"
+                            format="hh:mm"
+                            height="100"
+                            width="450"
+                            x="0"
+                            y="165">
+                            <Variant
+                                mode="AMBIENT"
+                                target="alpha"
+                                value="0" />
+                            <Font
+                                color="#ffffffff"
+                                family="ra_numerics"
+                                size="110"
+                                weight="BOLD" />
+                        </TimeText>
+
+                        <!-- Ambient mode version - thinner weight -->
+                        <TimeText
+                            alpha="0"
+                            format="hh:mm"
+                            height="100"
+                            width="450"
+                            x="0"
+                            y="165">
+                            <Variant
+                                mode="AMBIENT"
+                                target="alpha"
+                                value="255" />
+                            <Font
+                                color="#ffffffff"
+                                family="ra_light"
+                                size="110"
+                                weight="LIGHT"/>
+                        </TimeText>
+                    </DigitalClock>
+
+                    <PartText
+                        x="0"
+                        y="270"
+                        width="450"
+                        height="30">
+                        <Variant
+                            mode="AMBIENT"
+                            target="alpha"
+                            value="0" />
+                        <Text>
+                            <Font
+                                color="#ffffffff"
+                                family="ra_medium"
+                                size="30"
+                                weight="MEDIUM">
+                                <Template>
+                                    <![CDATA[%s]]>
+                                    <Parameter expression="icuText(&quot; E d MMM&quot;)" />
+                                </Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+
+                    <PartText
+                        x="0"
+                        y="270"
+                        width="450"
+                        height="30"
+                        alpha="0">
+                        <Variant
+                            mode="AMBIENT"
+                            target="alpha"
+                            value="255" />
+                        <Text>
+                            <Font
+                                color="#ffffffff"
+                                family="ra_light"
+                                size="30"
+                                weight="LIGHT">
+                                <Template>
+                                    <![CDATA[%s]]>
+                                    <Parameter expression="icuText(&quot; E d MMM&quot;)" />
+                                </Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Default>
+        </Condition>
+
+        <Condition>
+            <Expressions>
+                <Expression name="is_top_of_hour">
+                    <![CDATA[[MINUTE] == 0]]>
+                </Expression>
+            </Expressions>
+            <Compare expression="is_top_of_hour">
+                <!-- Move arrow together -->
+                <Group
+                    name="outer_ring"
+                    height="450"
+                    pivotX="0.5"
+                    pivotY="0.5"
+                    width="450"
+                    x="0"
+                    y="0">
+                    <Group
+                        name="outer_ring"
+                        height="450"
+                        pivotX="0.5"
+                        pivotY="0.5"
+                        width="450"
+                        x="0"
+                        y="0">
+                        <Variant
+                            mode="AMBIENT"
+                            target="alpha"
+                            value="0" />
+
+                        <Transform
+                            target="angle"
+                            value="([SECOND_MILLISECOND] * 6) % 360">
+                            <Animation duration="0" />
+                        </Transform>
+                        <PartImage
+                            height="450"
+                            tintColor="#e30613"
+                            width="450"
+                            x="0"
+                            y="0">
+                            <Image resource="clock_outer" />
+                        </PartImage>
+                    </Group>
+
+                    <Group
+                        name="inner_ring"
+                        height="450"
+                        pivotX="0.5"
+                        pivotY="0.5"
+                        width="450"
+                        x="0"
+                        y="0">
+                        <Variant
+                            mode="AMBIENT"
+                            target="alpha"
+                            value="0" />
+
+                        <Transform
+                            target="angle"
+                            value="([SECOND_MILLISECOND] * 6) % 360">
+                            <Animation duration="0" />
+                        </Transform>
+                        <PartImage
+                            height="450"
+                            tintColor="#e30613"
+                            width="450"
+                            x="0"
+                            y="0">
+                            <Image resource="clock_inner" />
+                        </PartImage>
+                    </Group>
+
+                    <Group
+                        name="outer_ring_ambient"
+                        alpha="0"
+                        height="450"
+                        pivotX="0.5"
+                        pivotY="0.5"
+                        width="450"
+                        x="0"
+                        y="0">
+                        <Variant
+                            mode="AMBIENT"
+                            target="alpha"
+                            value="255" />
+
+                        <PartImage
+                            height="450"
+                            tintColor="#e30613"
+                            width="450"
+                            x="0"
+                            y="0">
+                            <Image resource="clock_outer" />
+                        </PartImage>
+                    </Group>
+
+                    <Group
+                        name="inner_ring_ambient"
+                        alpha="0"
+                        height="450"
+                        pivotX="0.5"
+                        pivotY="0.5"
+                        width="450"
+                        x="0"
+                        y="0">
+                        <Variant
+                            mode="AMBIENT"
+                            target="alpha"
+                            value="255" />
+
+                        <PartImage
+                            height="450"
+                            tintColor="#e30613"
+                            width="450"
+                            x="0"
+                            y="0">
+                            <Image resource="clock_inner" />
+                        </PartImage>
+                    </Group>
+                </Group>
+            </Compare>
+            <Default>
+                <!-- Normal behaviour - opposing arrows -->
+                <Group
+                    name="outer_ring"
+                    height="450"
+                    pivotX="0.5"
+                    pivotY="0.5"
+                    width="450"
+                    x="0"
+                    y="0">
+                    <Group
+                        name="outer_ring"
+                        height="450"
+                        pivotX="0.5"
+                        pivotY="0.5"
+                        width="450"
+                        x="0"
+                        y="0">
+                        <Variant
+                            mode="AMBIENT"
+                            target="alpha"
+                            value="0" />
+
+                        <Transform
+                            target="angle"
+                            value="([SECOND_MILLISECOND] * 6) % 360">
+                            <Animation duration="0" />
+                        </Transform>
+                        <PartImage
+                            height="450"
+                            tintColor="#e30613"
+                            width="450"
+                            x="0"
+                            y="0">
+                            <Image resource="clock_outer" />
+                        </PartImage>
+                    </Group>
+
+                    <Group
+                        name="inner_ring"
+                        height="450"
+                        pivotX="0.5"
+                        pivotY="0.5"
+                        width="450"
+                        x="0"
+                        y="0">
+                        <Variant
+                            mode="AMBIENT"
+                            target="alpha"
+                            value="0" />
+
+                        <Transform
+                            target="angle"
+                            value="([SECOND_MILLISECOND] * -6) % 360">
+                            <Animation duration="0" />
+                        </Transform>
+                        <PartImage
+                            height="450"
+                            tintColor="#e30613"
+                            width="450"
+                            x="0"
+                            y="0">
+                            <Image resource="clock_inner" />
+                        </PartImage>
+                    </Group>
+
+                    <Group
+                        name="outer_ring_ambient"
+                        alpha="0"
+                        height="450"
+                        pivotX="0.5"
+                        pivotY="0.5"
+                        width="450"
+                        x="0"
+                        y="0">
+                        <Variant
+                            mode="AMBIENT"
+                            target="alpha"
+                            value="255" />
+
+                        <PartImage
+                            height="450"
+                            tintColor="#e30613"
+                            width="450"
+                            x="0"
+                            y="0">
+                            <Image resource="clock_outer" />
+                        </PartImage>
+                    </Group>
+
+                    <Group
+                        name="inner_ring_ambient"
+                        alpha="0"
+                        height="450"
+                        pivotX="0.5"
+                        pivotY="0.5"
+                        width="450"
+                        x="0"
+                        y="0">
+                        <Variant
+                            mode="AMBIENT"
+                            target="alpha"
+                            value="255" />
+
+                        <PartImage
+                            height="450"
+                            tintColor="#e30613"
+                            width="450"
+                            x="0"
+                            y="0">
+                            <Image resource="clock_inner" />
+                        </PartImage>
+                    </Group>
+                </Group>
+            </Default>
+        </Condition>
+    </Scene>
+</WatchFace>
