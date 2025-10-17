@@ -34,8 +34,8 @@ jobs:
           export debug=${{ inputs.debug && 'debug' || 'release' }}
           echo "debug=$debug" >> $GITHUB_OUTPUT
           echo "build_command=bundle${DEBUG_OR_RELEASE^} assemble${DEBUG_OR_RELEASE^}" >> $GITHUB_OUTPUT
-          echo "aabPath=./app/build/outputs/bundle/${DEBUG_OR_RELEASE}/*.aab" >> $GITHUB_OUTPUT
-          echo "apkPath=./app/build/outputs/apk/${DEBUG_OR_RELEASE}/*.apk" >> $GITHUB_OUTPUT
+          echo "aabPath=./watchface/build/outputs/bundle/${DEBUG_OR_RELEASE}/*.aab" >> $GITHUB_OUTPUT
+          echo "apkPath=./watchface/build/outputs/apk/${DEBUG_OR_RELEASE}/*.apk" >> $GITHUB_OUTPUT
         env:
           DEBUG_OR_RELEASE: ${{ inputs.debug && 'debug' || 'release' }}
 
