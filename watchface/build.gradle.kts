@@ -29,12 +29,12 @@ plugins {
 android {
     namespace = "dev.davwheat.railclock"
     compileSdk {
-        version = release(33)
+        version = release(34)
     }
 
     defaultConfig {
         applicationId = "dev.davwheat.railclock"
-        minSdk = 33
+        minSdk = 34
         targetSdk = 36
         versionCode = getBuildNumber()
         versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
