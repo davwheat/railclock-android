@@ -24,22 +24,20 @@ fun getBuildNumber(): Int {
 
 plugins {
     alias(libs.plugins.android.application)
-
 }
 
 android {
     namespace = "dev.davwheat.railclock"
     compileSdk {
-        version = release(36)
+        version = release(33)
     }
 
     defaultConfig {
         applicationId = "dev.davwheat.railclock"
-        minSdk = 35
+        minSdk = 33
         targetSdk = 36
         versionCode = getBuildNumber()
         versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
-
     }
 
     signingConfigs {
@@ -56,7 +54,7 @@ android {
 
     buildTypes {
         debug {
-            isMinifyEnabled = true
+            isDebuggable = true
         }
 
         release {
@@ -69,13 +67,4 @@ android {
             signingConfig = signingConfigs.getByName("release")
         }
     }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
-dependencies {
-    implementation(libs.play.services.wearable)
 }
