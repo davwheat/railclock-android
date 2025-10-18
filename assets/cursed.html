@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rail Clock</title>
+
+<style>
+  @font-face {
+    font-family: RailClock;
+    src: url(clock.ttf) format("truetype");
+  }
+
+  html {
+    font-family: RailClock, sans-serif;
+    font-size: 15rem;
+  }
+</style></head>
+<body>
+  <p id="clock"></p>
+
+  <script>
+    let count = 0;
+    function updateClock() {
+      const clockElement = document.getElementById('clock');
+      clockElement.textContent = String(count).padStart(2, '0');
+      count++;
+      if (count === 60) {
+        count = 0;
+      }
+    }
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
