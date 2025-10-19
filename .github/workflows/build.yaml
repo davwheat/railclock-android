@@ -34,8 +34,10 @@ jobs:
           export debug=${{ inputs.debug && 'debug' || 'release' }}
           echo "debug=$debug" >> $GITHUB_OUTPUT
           echo "build_command=bundle${DEBUG_OR_RELEASE^} assemble${DEBUG_OR_RELEASE^}" >> $GITHUB_OUTPUT
-          echo "aabPath=./watchface/build/outputs/bundle/${DEBUG_OR_RELEASE}/*.aab" >> $GITHUB_OUTPUT
-          echo "apkPath=./watchface/build/outputs/apk/${DEBUG_OR_RELEASE}/*.apk" >> $GITHUB_OUTPUT
+          echo "watchAabPath=./watchface/build/outputs/bundle/${DEBUG_OR_RELEASE}/*.aab" >> $GITHUB_OUTPUT
+          echo "watchApkPath=./watchface/build/outputs/apk/${DEBUG_OR_RELEASE}/*.apk" >> $GITHUB_OUTPUT
+          echo "appAabPath=./app/build/outputs/bundle/${DEBUG_OR_RELEASE}/*.aab" >> $GITHUB_OUTPUT
+          echo "appApkPath=./app/build/outputs/apk/${DEBUG_OR_RELEASE}/*.apk" >> $GITHUB_OUTPUT
         env:
           DEBUG_OR_RELEASE: ${{ inputs.debug && 'debug' || 'release' }}
 
@@ -64,24 +66,40 @@ jobs:
       - name: Build AAB and APK with Gradle
         run: ./gradlew --refresh-dependencies ${{steps.config.outputs.build_command}}
 
-      - name: Upload AAB artifacts to workflow
+      - name: Upload watch face AAB artifacts to workflow
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.debug && 'debug' || 'release' }} AAB
+          name: Watch Face ${{ inputs.debug && 'debug' || 'release' }} AAB
           if-no-files-found: error
-          path: ${{ steps.config.outputs.aabPath }}
+          path: ${{ steps.config.outputs.watchAabPath }}
 
-      - name: Upload APK artifacts to workflow
+      - name: Upload watch face APK artifacts to workflow
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.debug && 'debug' || 'release' }} APK
+          name: Watch Face ${{ inputs.debug && 'debug' || 'release' }} APK
           if-no-files-found: error
-          path: ${{ steps.config.outputs.apkPath }}
+          path: ${{ steps.config.outputs.watchApkPath }}
+
+      - name: Upload widget AAB artifacts to workflow
+        uses: actions/upload-artifact@v4
+        with:
+          name: Widget ${{ inputs.debug && 'debug' || 'release' }} AAB
+          if-no-files-found: error
+          path: ${{ steps.config.outputs.appAabPath }}
+
+      - name: Upload widget APK artifacts to workflow
+        uses: actions/upload-artifact@v4
+        with:
+          name: Widget ${{ inputs.debug && 'debug' || 'release' }} APK
+          if-no-files-found: error
+          path: ${{ steps.config.outputs.appApkPath }}
 
       - name: Upload build artifacts to release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            ${{ steps.config.outputs.aabPath }}
-            ${{ steps.config.outputs.apkPath }}
+            ${{ steps.config.outputs.watchAabPath }}
+            ${{ steps.config.outputs.watchApkPath }}
+            ${{ steps.config.outputs.appAabPath }}
+            ${{ steps.config.outputs.appApkPath }}
