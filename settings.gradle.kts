@@ -1,7 +1,5 @@
 pluginManagement {
     repositories {
-        file("../wff-validator.jar")
-        file("../memory-footprint.jar")
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -23,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Rail Clock"
 include(":watchface")
+include(":app")

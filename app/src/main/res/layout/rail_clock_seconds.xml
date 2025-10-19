@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:background="@android:color/black"
+    android:scaleX="2.55"
+    android:scaleY="2.55">
+
+    <AnalogClock
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dialTint="@android:color/transparent"
+        android:hand_secondTint="#e30613"
+        android:hand_hourTint="@android:color/transparent"
+        android:hand_minuteTint="@android:color/transparent"
+        android:hand_second="@drawable/clock_outer"
+        android:gravity="center" />
+
+    <AnalogClock
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:rotationY="180"
+        android:dialTint="@android:color/transparent"
+        android:hand_secondTint="#e30613"
+        android:hand_hourTint="@android:color/transparent"
+        android:hand_minuteTint="@android:color/transparent"
+        android:hand_second="@drawable/clock_inner"
+        android:gravity="center" />
+</RelativeLayout>

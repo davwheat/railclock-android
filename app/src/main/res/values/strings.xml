@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Rail Clock</string>
+    <string name="widget_description">Rail Clock of Great Britain</string>
+    <string name="home_title">Rail Clock</string>
+    <string name="add_widget_button">Add to home screen</string>
+    <string name="more_info_button">More info</string>
+    <string name="info_sheet_title">About the Rail Clock</string>
+    <string name="info_sheet_1">We\'ve recreated the Rail Clock to the best of our ability, but you might notice some things don\'t match up to reality.</string>
+    <string name="info_sheet_2_html"><![CDATA[Android widget limitations mean that it is not possible for:<ul><li>the arrows to glide smoothly</li><li>the arrows to move together as the double arrows at 12:00 and 00:00</li><li>the numerals to use the correct font</li></ul>]]></string>
+    <string name="info_sheet_3">Hopefully, you\'ll enjoy it nonetheless! The WearOS watch face does not suffer from these limitations.</string>
+</resources>
