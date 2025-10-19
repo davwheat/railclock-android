@@ -1,4 +1,3 @@
-import org.gradle.kotlin.dsl.support.kotlinCompilerOptions
 import java.io.FileInputStream
 import java.text.SimpleDateFormat
 import java.time.Duration
@@ -17,7 +16,7 @@ fun getBuildNumber(): Int {
         (Duration.between(
             date.withSecond(0).withMinute(0).withHour(0),
             date
-        ).seconds / 86400) * 99.0
+        ).seconds / 86400) * 49.0 + 49.0
     val twoDigitSuffix = seconds.toInt()
 
     return Integer.parseInt(df.format(Date()) + String.format("%02d", twoDigitSuffix))
