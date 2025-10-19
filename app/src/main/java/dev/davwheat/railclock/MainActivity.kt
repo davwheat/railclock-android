@@ -142,7 +142,9 @@ fun HomeContent() {
                 sheetState = sheetState,
             ) {
                 Column(
-                    Modifier.padding(horizontal = 16.dp),
+                    Modifier
+                        .padding(horizontal = 18.dp)
+                        .padding(bottom = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     Text(
